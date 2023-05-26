@@ -28,7 +28,7 @@ impl OrbitCameraPlugin {
 impl Plugin for OrbitCameraPlugin {
     fn build(&self, app: &mut App) {
         let app = app
-            .add_system(on_controller_enabled_changed.in_base_set(CoreSet::PreUpdate))
+            .add_systems(PreUpdate, on_controller_enabled_changed)
             .add_system(control_system)
             .add_event::<ControlEvent>();
 
@@ -41,7 +41,6 @@ impl Plugin for OrbitCameraPlugin {
 #[derive(Bundle)]
 pub struct OrbitCameraBundle {
     controller: OrbitCameraController,
-    #[bundle]
     look_transform: LookTransformBundle,
     transform: Transform,
 }

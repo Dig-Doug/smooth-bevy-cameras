@@ -25,7 +25,7 @@ impl FpsCameraPlugin {
 impl Plugin for FpsCameraPlugin {
     fn build(&self, app: &mut App) {
         let app = app
-            .add_system(on_controller_enabled_changed.in_base_set(CoreSet::PreUpdate))
+            .add_systems(PreUpdate, on_controller_enabled_changed)
             .add_system(control_system)
             .add_event::<ControlEvent>();
 
@@ -38,7 +38,6 @@ impl Plugin for FpsCameraPlugin {
 #[derive(Bundle)]
 pub struct FpsCameraBundle {
     controller: FpsCameraController,
-    #[bundle]
     look_transform: LookTransformBundle,
     transform: Transform,
 }
